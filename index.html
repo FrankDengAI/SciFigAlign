@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SciFigAlign — Manuscript-Grounded Scientific Figure Scoring</title>
+  <meta name="description" content="SciFigAlign is a benchmark and fine-tuned multimodal scorer for scientific figures, grounded in caption, citing paragraphs, and manuscript context across Clarity, Relevance, Informativeness, and Structure." />
+  <meta name="keywords" content="SciFigAlign, scientific figures, figure quality, multimodal scoring, peer review, CLIP, SciBERT, benchmark" />
+  <meta property="og:title" content="SciFigAlign" />
+  <meta property="og:description" content="Scoring scientific figures by fine-tuned alignment of visuals with manuscript evidence." />
+  <meta property="og:image" content="assets/img/fig1.png" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true"></span>
+        SciFigAlign
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#benchmark">Benchmark</a>
+        <a href="#method">Method</a>
+        <a href="#corpus">Corpus</a>
+        <a href="#results">Results</a>
+        <a href="#code">Code</a>
+        <a href="#cite">Cite</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Benchmark &amp; Multimodal Scorer</div>
+          <h1><span>SciFigAlign</span><br />Score figures with the manuscript, not pixels alone.</h1>
+          <p class="hero-lead">
+            A peer-review-oriented benchmark and fine-tuned scorer that binds each published figure to its caption, citing paragraphs, and paper context—predicting Clarity, Relevance, Informativeness, and Structure.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-ghost" href="#benchmark">Explore Benchmark</a>
+            <span class="btn btn-ghost btn-soon" title="Coming soon">Paper (soon)</span>
+            <span class="btn btn-ghost btn-soon" title="Coming soon">Code release (soon)</span>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <figure class="figure-card">
+            <img src="assets/img/fig1.png" alt="SciFigAlign overview versus prior image assessment paradigms" />
+            <figcaption class="figure-cap">Figure 1. Prior landscape vs. SciFigAlign: manuscript-grounded CL / RE / IN / ST scoring.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmark">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>The SciFigAlign Benchmark</h2>
+          <p>
+            Built from peer-reviewed CS conference PDFs (ICLR / NeurIPS / ICML). Each figure is index-bound to manuscript evidence and rated on a 1–5 peer-review rubric—not generic IQA aesthetics.
+          </p>
+        </div>
+
+        <div class="metrics reveal">
+          <div class="metric"><div class="val" data-count="3857">0</div><div class="lab">Labeled figures</div></div>
+          <div class="metric"><div class="val" data-count="3126">0</div><div class="lab">Source papers</div></div>
+          <div class="metric"><div class="val" data-count="396">0</div><div class="lab">Human-rated test set</div></div>
+          <div class="metric"><div class="val">4</div><div class="lab">Rubric dimensions</div></div>
+        </div>
+
+        <div class="dims reveal">
+          <div class="dim"><strong>Clarity (CL)</strong><span>Print-scale legibility, contrast, labels, legends.</span></div>
+          <div class="dim"><strong>Relevance (RE)</strong><span>Fit to caption, citing text, and paper narrative.</span></div>
+          <div class="dim"><strong>Informativeness (IN)</strong><span>Scientific content density for the claimed result.</span></div>
+          <div class="dim"><strong>Structure (ST)</strong><span>Panel hierarchy and coherent reading path.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Manuscript-Grounded Scoring</h2>
+          <p>
+            SciFigAlign fine-tunes CLIP Vision and SciBERT end-to-end with per-modality cross-attention and CubeMLP fusion, jointly optimizing SmoothL1 regression and within-paper ranking.
+          </p>
+        </div>
+        <div class="grid-2">
+          <figure class="panel reveal">
+            <img src="assets/img/fig2.png" alt="SciFigAlign architecture diagram" loading="lazy" />
+            <div class="body">
+              <strong>Figure 2. Architecture.</strong>
+              <span style="color:var(--muted)"> Five streams → CrossAttn (text→vision) → CubeMLP → CL/RE/IN/ST heads. LLM judge is diagnostic only.</span>
+            </div>
+          </figure>
+          <ul class="feature-list reveal">
+            <li>
+              <strong>Index-resolved citing context</strong>
+              <span>Recover “Figure k / Fig. k” paragraphs instead of layout-only OCR neighborhoods.</span>
+            </li>
+            <li>
+              <strong>Per-modality alignment</strong>
+              <span>Caption, cites, abstract, and metadata each query visual patches separately.</span>
+            </li>
+            <li>
+              <strong>Within-paper ranking hinge</strong>
+              <span>Preserves relative order among figures from the same manuscript under mid–high score concentration.</span>
+            </li>
+            <li>
+              <strong>Auditable signals</strong>
+              <span>Exportable attention maps and CubeMLP modality weights for inspection.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="corpus">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Corpus Statistics</h2>
+          <p>
+            From 12,492 raw crops to 3,857 labeled figures with paper-level splits. Architecture / Other / Qualitative mix, score density around mean 3.54, and human + GPT-4o assisted labels under one rubric.
+          </p>
+        </div>
+        <figure class="panel reveal">
+          <img src="assets/img/fig3.png" alt="SciFigAlign corpus statistics" loading="lazy" />
+          <div class="body">
+            <strong>Figure 3. Dataset profile.</strong>
+            <span style="color:var(--muted)"> Rubric profiles, type mix, score density, and construction funnel (test n=396).</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Headline Results</h2>
+          <p>
+            On the held-out human-rated test subset (n=396, paper-level split), SciFigAlign reduces absolute error sharply versus LLM-as-judge and frozen similarity ridges, while lifting within-paper pairwise accuracy.
+          </p>
+        </div>
+        <div class="results reveal">
+          <div class="panel" style="padding:0.4rem 0.6rem 0.2rem;">
+            <table class="compare">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>MAE ↓</th>
+                  <th>SRCC ↑</th>
+                  <th>PA ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Mean / Median</td><td>0.90–0.94</td><td>—</td><td>0%</td></tr>
+                <tr><td>SigLIP2-Ridge</td><td>0.877</td><td>0.266</td><td>65.8%</td></tr>
+                <tr><td>LLM-as-judge (v9)</td><td>0.864</td><td>0.198</td><td>63.2%</td></tr>
+                <tr class="best"><td>SciFigAlign</td><td>0.3524</td><td>0.3088</td><td>81.64%</td></tr>
+              </tbody>
+            </table>
+            <p class="note">≈59% relative MAE reduction vs. best LLM judge. PA: within-paper pairs with score gap ≥ 0.5.</p>
+          </div>
+          <div class="soon-box">
+            <h3>Why this benchmark?</h3>
+            <p>
+              Natural IQA cannot read claims. CLIP-style similarity is too coarse for peer-review rubrics. Generation faithfulness targets synthetic images. Zero-shot VLM judges are hard to calibrate. SciFigAlign scores <em>published</em> figures with manuscript evidence and learned ranking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="code">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Code &amp; Data</h2>
+          <p>Training code, checkpoints, and the full corpus will be uploaded as soon as packaging is finished.</p>
+        </div>
+        <div class="soon-box reveal">
+          <h3>Release status</h3>
+          <p>
+            This repository currently hosts the project page and paper assets. Evaluation scripts, pretrained SciFigAlign weights, and dataset download instructions are coming soon—please star / watch the repo for updates.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cite">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Citation</h2>
+          <p>If you use SciFigAlign, please cite:</p>
+        </div>
+        <div class="bib reveal" id="bibtex">
+          <button class="copy-btn" type="button" data-copy="#bibtex-code">Copy</button>
+<pre id="bibtex-code">@article{scifigalign2026,
+  title={SciFigAlign: Scoring Scientific Figures by Fine-tuned Alignment of Visuals with Manuscript Evidence},
+  author={Xu, Chuanzhi and Deng, Zihan and Liang, Huiqi and Yue, Chengkun and Cui, Zhanlin and Ye, Pengfei and Cai, Weidong},
+  year={2026},
+  note={Preprint}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © SciFigAlign authors ·
+      <a href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener">github.com/FrankDengAI/SciFigAlign</a>
+      · Project page for the SciFigAlign benchmark &amp; scorer
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.log
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+__pycache__/
+*.pyc
+.venv/
+.env
+.idea/
+.vscode/
+node_modules/

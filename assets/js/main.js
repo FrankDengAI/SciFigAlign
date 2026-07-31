@@ -47,21 +47,4 @@
   } else {
     counters.forEach(animateCount);
   }
-
-  document.querySelectorAll("[data-copy]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const sel = btn.getAttribute("data-copy");
-      const node = document.querySelector(sel);
-      if (!node) return;
-      const text = node.innerText.trim();
-      try {
-        await navigator.clipboard.writeText(text);
-        const old = btn.textContent;
-        btn.textContent = "Copied";
-        setTimeout(() => (btn.textContent = old), 1400);
-      } catch (_) {
-        btn.textContent = "Select & copy";
-      }
-    });
-  });
 })();

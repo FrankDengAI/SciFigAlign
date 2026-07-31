@@ -44,7 +44,7 @@ Unlike natural-image IQA or generic CLIP matching, each figure is bound to its *
 | Asset | Status |
 |---|---|
 | Project page | ✅ in this repo (`index.html`) |
-| Paper PDF / arXiv | ⏳ coming soon |
+| Paper PDF | ⏳ coming soon |
 | Training & eval code | ⏳ coming soon |
 | Checkpoints & corpus | ⏳ coming soon |
 
@@ -54,22 +54,6 @@ Unlike natural-image IQA or generic CLIP matching, each figure is bound to its *
   <img src="assets/img/fig3.png" alt="SciFigAlign corpus statistics" width="92%" />
 </p>
 
-## Citation
-
-```bibtex
-@article{scifigalign2026,
-  title={SciFigAlign: Scoring Scientific Figures by Fine-tuned Alignment of Visuals with Manuscript Evidence},
-  author={Xu, Chuanzhi and Deng, Zihan and Liang, Huiqi and Yue, Chengkun and Cui, Zhanlin and Ye, Pengfei and Cai, Weidong},
-  year={2026},
-  note={Preprint}
-}
-```
-
-## Contact
-
-- chuanzhi.xu@sydney.edu.au
-- zhdeng@hku.hk
-
 ## License
 
-Code and data licenses will be announced with the public release. Website content © SciFigAlign authors.
+Code and data licenses will be announced with the public release.

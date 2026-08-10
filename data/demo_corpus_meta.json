@@ -1,0 +1,10 @@
+{
+  "description": "Human-rated demo subset exported from dataset_overview.json",
+  "n_figures": 300,
+  "n_papers": 300,
+  "split_protocol": "paper-level 80/10/10, seed=42",
+  "train": 240,
+  "val": 30,
+  "test": 30,
+  "note": "Full 3,857-figure corpus with citing paragraphs is released separately on HuggingFace."
+}

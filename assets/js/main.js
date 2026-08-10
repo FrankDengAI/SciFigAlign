@@ -47,4 +47,23 @@
   } else {
     counters.forEach(animateCount);
   }
+
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const sel = btn.getAttribute("data-copy");
+      const node = sel ? document.querySelector(sel) : null;
+      const text = node ? node.textContent : "";
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text.trim());
+        const prev = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => {
+          btn.textContent = prev || "Copy";
+        }, 1200);
+      } catch (_) {
+        btn.textContent = "Copy failed";
+      }
+    });
+  });
 })();

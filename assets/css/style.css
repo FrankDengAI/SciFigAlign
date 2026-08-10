@@ -211,9 +211,33 @@ img {
   color: var(--ink-soft);
 }
 
-.btn-soon {
-  opacity: 0.72;
-  cursor: default;
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.6rem;
+  max-width: 28rem;
+}
+
+.hero-stats div {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.75rem 0.85rem;
+}
+
+.hero-stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.hero-stats span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .hero-visual {
@@ -417,26 +441,56 @@ section {
 }
 
 .note {
-  margin-top: 0.8rem;
+  margin: 0.8rem 1rem 1rem;
   color: var(--muted);
   font-size: 0.9rem;
 }
 
-.soon-box {
-  border: 1px dashed #9eb3c7;
-  background: linear-gradient(135deg, rgba(31, 111, 235, 0.05), rgba(14, 165, 164, 0.06));
+.table-wrap {
+  padding: 0.35rem 0.4rem 0.15rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.info-card {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #ffffff, #f5f9fc);
   border-radius: var(--radius);
-  padding: 1.4rem 1.3rem;
+  padding: 1.35rem 1.3rem;
+  box-shadow: 0 12px 30px rgba(11, 31, 51, 0.05);
 }
 
-.soon-box h3 {
-  margin: 0 0 0.45rem;
+.info-card h3 {
+  margin: 0 0 0.55rem;
   font-family: var(--font-display);
+  font-size: 1.2rem;
 }
 
-.soon-box p {
+.info-card p {
   margin: 0;
   color: var(--muted);
+}
+
+.plain-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.code-block {
+  margin: 0;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  background: #0f2133;
+  color: #d7e7f7;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
 }
 
 .bib {
@@ -449,6 +503,10 @@ section {
   font-family: var(--font-mono);
   font-size: 0.84rem;
   line-height: 1.55;
+}
+
+.bib code {
+  white-space: pre-wrap;
 }
 
 .copy-btn {
@@ -473,6 +531,13 @@ section {
   color: var(--muted);
   border-top: 1px solid var(--line);
   font-size: 0.92rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* Reveal */
@@ -505,7 +570,8 @@ section {
   .metrics,
   .dims,
   .grid-2,
-  .results {
+  .results,
+  .hero-stats {
     grid-template-columns: 1fr;
   }
 

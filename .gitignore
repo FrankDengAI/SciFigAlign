@@ -8,8 +8,24 @@ Thumbs.db
 *.synctex.gz
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+venv/
 .env
 .idea/
 .vscode/
 node_modules/
+
+# Training / inference artifacts
+runs/
+outputs/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+visualization_data/
+test_predictions.jsonl
+
+# Large local corpora (use HF or place under data/)
+data_source/
+capstone-figures/

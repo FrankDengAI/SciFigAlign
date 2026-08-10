@@ -1,0 +1,57 @@
+{
+  "paper_title": "SciFigAlign: Scoring Scientific Figures by Fine-tuned Alignment of Visuals with Manuscript Evidence",
+  "corpus": {
+    "final_figures": 3857,
+    "papers": 3126,
+    "raw_crops": 12492,
+    "human_labels": 1982,
+    "gpt4o_labels": 1875,
+    "test_human_figures": 396,
+    "split_protocol": "paper-level 80/10/10",
+    "split_seed": 42,
+    "venues": ["ICLR", "NeurIPS", "ICML"]
+  },
+  "rubric_dimensions": ["clarity", "relevance", "informativeness", "structure"],
+  "model": {
+    "text_encoder": "allenai/scibert_scivocab_uncased",
+    "image_encoder": "openai/clip-vit-base-patch32",
+    "proj_dim": 256,
+    "cube_tokens": 4,
+    "cube_depth": 3,
+    "mixing_expansion": 2.0,
+    "cross_attention_heads": 4,
+    "cross_attention_layers": 1,
+    "dropout": 0.1,
+    "max_text_length": 256,
+    "fine_tune_encoders": true
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "lr": 2e-5,
+    "weight_decay": 1e-4,
+    "batch_size": 4,
+    "epochs": "5-10 with early stopping",
+    "precision": "fp16",
+    "regression_loss": "SmoothL1(beta=1)",
+    "ranking_lambda": 0.2,
+    "ranking_margin": 1.0,
+    "ranking_min_diff": 0.5,
+    "deployed_input_mode": "full_denoised",
+    "seed": 42
+  },
+  "evaluation": {
+    "test_split": "splits_v2",
+    "test_mae": 0.3524,
+    "test_pa": 0.8164,
+    "test_srcc": 0.3088,
+    "pairwise_gap_tau": 0.5
+  },
+  "data_layout": {
+    "figures_hf": "Jhao0930/capstone-figures",
+    "local_figure_roots": [
+      "./data/figures",
+      "./data_source/figures",
+      "../capstone-figures"
+    ]
+  }
+}

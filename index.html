@@ -28,6 +28,7 @@
         <a href="#corpus">Corpus</a>
         <a href="#results">Results</a>
         <a href="#code">Code</a>
+        <a href="#citation">Citation</a>
       </nav>
     </div>
   </header>
@@ -42,10 +43,15 @@
             A peer-review-oriented benchmark and fine-tuned scorer that binds each published figure to its caption, citing paragraphs, and paper context—predicting Clarity, Relevance, Informativeness, and Structure.
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn btn-ghost" href="#benchmark">Explore Benchmark</a>
-            <span class="btn btn-ghost btn-soon" title="Coming soon">Paper (soon)</span>
-            <span class="btn btn-ghost btn-soon" title="Coming soon">Code release (soon)</span>
+            <a class="btn btn-primary" href="https://arxiv.org/abs/2607.27066" target="_blank" rel="noopener noreferrer">arXiv Paper</a>
+            <a class="btn btn-ghost" href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn btn-ghost" href="https://huggingface.co/datasets/Jhao0930/capstone-figures" target="_blank" rel="noopener noreferrer">Dataset</a>
+            <a class="btn btn-ghost" href="#code">Quick Start</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>0.3524</strong><span>Test MAE</span></div>
+            <div><strong>81.64%</strong><span>Pairwise Acc.</span></div>
+            <div><strong>3,857</strong><span>Labeled figures</span></div>
           </div>
         </div>
         <div class="hero-visual reveal">
@@ -95,7 +101,7 @@
             <img src="assets/img/fig2.png" alt="SciFigAlign architecture diagram" loading="lazy" />
             <div class="body">
               <strong>Figure 2. Architecture.</strong>
-              <span style="color:var(--muted)"> Five streams → CrossAttn (text→vision) → CubeMLP → CL/RE/IN/ST heads. LLM judge is diagnostic only.</span>
+              <span class="muted"> Five streams → CrossAttn (text→vision) → CubeMLP → CL/RE/IN/ST heads.</span>
             </div>
           </figure>
           <ul class="feature-list reveal">
@@ -132,7 +138,7 @@
           <img src="assets/img/fig3.png" alt="SciFigAlign corpus statistics" loading="lazy" />
           <div class="body">
             <strong>Figure 3. Dataset profile.</strong>
-            <span style="color:var(--muted)"> Rubric profiles, type mix, score density, and construction funnel (test n=396).</span>
+            <span class="muted"> Rubric profiles, type mix, score density, and construction funnel (test n=396).</span>
           </div>
         </figure>
       </div>
@@ -147,7 +153,7 @@
           </p>
         </div>
         <div class="results reveal">
-          <div class="panel" style="padding:0.4rem 0.6rem 0.2rem;">
+          <div class="panel table-wrap">
             <table class="compare">
               <thead>
                 <tr>
@@ -166,7 +172,7 @@
             </table>
             <p class="note">≈59% relative MAE reduction vs. best LLM judge. PA: within-paper pairs with score gap ≥ 0.5.</p>
           </div>
-          <div class="soon-box">
+          <div class="info-card">
             <h3>Why this benchmark?</h3>
             <p>
               Natural IQA cannot read claims. CLIP-style similarity is too coarse for peer-review rubrics. Generation faithfulness targets synthetic images. Zero-shot VLM judges are hard to calibrate. SciFigAlign scores <em>published</em> figures with manuscript evidence and learned ranking.
@@ -179,25 +185,70 @@
     <section id="code">
       <div class="container">
         <div class="section-head reveal">
-          <h2>Code &amp; Data</h2>
-          <p>Training code, checkpoints, and the full corpus will be uploaded as soon as packaging is finished.</p>
-        </div>
-        <div class="soon-box reveal">
-          <h3>Release status</h3>
+          <h2>Code &amp; Demo Data</h2>
           <p>
-            This repository currently hosts the project page and paper assets. Evaluation scripts, pretrained SciFigAlign weights, and dataset download instructions are coming soon—please star / watch the repo for updates.
+            Training and inference scripts ship in this repository, together with a 300-figure human-rated demo under <code>data/</code>. The full corpus is on Hugging Face.
           </p>
+        </div>
+        <div class="grid-2 reveal">
+          <div class="info-card">
+            <h3>Quick start</h3>
+            <pre class="code-block"><code>pip install -r requirements-core.txt
+python train.py \
+  --train_jsonl data/splits/train.jsonl \
+  --val_jsonl data/splits/val.jsonl \
+  --output_dir runs/demo \
+  --verify_images \
+  --use_ranking_loss \
+  --ranking_weight 0.2 \
+  --epochs 3</code></pre>
+          </div>
+          <div class="info-card">
+            <h3>What is included</h3>
+            <ul class="plain-list">
+              <li>CLIP + SciBERT CubeMLP scorer (<code>src/models/</code>)</li>
+              <li>Paper config (<code>config/paper_config.json</code>)</li>
+              <li>Demo splits + 300 PNG crops (<code>data/</code>)</li>
+              <li>Pairwise evaluation script (<code>scripts/</code>)</li>
+            </ul>
+            <div class="cta-row" style="margin-top:1rem;">
+              <a class="btn btn-primary" href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener noreferrer">Browse repository</a>
+              <a class="btn btn-ghost" href="https://huggingface.co/datasets/Jhao0930/capstone-figures" target="_blank" rel="noopener noreferrer">Full dataset</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <section id="citation">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Citation</h2>
+          <p>If you use SciFigAlign, please cite the following paper.</p>
+        </div>
+        <div class="bib reveal" id="bibtex">
+          <button class="copy-btn" type="button" data-copy="#bibtex code">Copy</button>
+          <code>@article{xu2026scifigalign,
+  title={SciFigAlign: Scoring Scientific Figures by Fine-tuned Alignment of Visuals with Manuscript Evidence},
+  author={Xu, Chuanzhi and Deng, Zihan and Liang, Huiqi and Yue, Chengkun and Cui, Zhanlin and Ye, Pengfei and Cai, Weidong},
+  journal={arXiv preprint arXiv:2607.27066},
+  year={2026}
+}</code>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      SciFigAlign ·
-      <a href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener">github.com/FrankDengAI/SciFigAlign</a>
-      · Project page for the SciFigAlign benchmark &amp; scorer
+    <div class="container footer-inner">
+      <span>SciFigAlign · MIT License</span>
+      <span>
+        <a href="https://arxiv.org/abs/2607.27066" target="_blank" rel="noopener noreferrer">arXiv</a>
+        ·
+        <a href="https://github.com/FrankDengAI/SciFigAlign" target="_blank" rel="noopener noreferrer">GitHub</a>
+        ·
+        <a href="https://huggingface.co/datasets/Jhao0930/capstone-figures" target="_blank" rel="noopener noreferrer">Dataset</a>
+      </span>
     </div>
   </footer>
 

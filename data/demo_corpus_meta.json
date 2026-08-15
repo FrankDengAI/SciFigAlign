@@ -6,5 +6,5 @@
   "train": 240,
   "val": 30,
   "test": 30,
-  "note": "Full 3,857-figure corpus with citing paragraphs is released separately on HuggingFace."
+  "note": "Full 3,857-figure corpus with citing paragraphs is released separately on Hugging Face: haihanlamu/SciFigAlign."
 }

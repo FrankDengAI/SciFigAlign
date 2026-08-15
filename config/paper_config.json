@@ -47,7 +47,7 @@
     "pairwise_gap_tau": 0.5
   },
   "data_layout": {
-    "figures_hf": "Jhao0930/capstone-figures",
+    "figures_hf": "haihanlamu/SciFigAlign",
     "local_figure_roots": [
       "./data/figures",
       "./data_source/figures",

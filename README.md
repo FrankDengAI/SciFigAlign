@@ -5,7 +5,8 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2607.27066-b31b1b.svg)](https://arxiv.org/abs/2607.27066)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-capstone--figures-ffcc4d)](https://huggingface.co/datasets/Jhao0930/capstone-figures)
+[![GitHub](https://img.shields.io/badge/GitHub-FrankDengAI%2FSciFigAlign-181717?logo=github)](https://github.com/FrankDengAI/SciFigAlign)
+[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-haihanlamu%2FSciFigAlign-ffcc4d)](https://huggingface.co/datasets/haihanlamu/SciFigAlign)
 [![Test MAE](https://img.shields.io/badge/test%20MAE-0.3524-0e7c66)](https://arxiv.org/abs/2607.27066)
 
 [Overview](#overview) · [Highlights](#highlights) · [Method](#method-at-a-glance) · [Installation](#installation) · [Data](#data) · [Training](#training) · [Inference](#inference) · [Citation](#citation)
@@ -16,7 +17,7 @@ Scientific figure assessment in peer review is not natural-image IQA: a figure m
 
 **SciFigAlign** fine-tunes CLIP Vision and SciBERT end-to-end so that each figure crop is scored against its caption, citing paragraphs, and light paper context on four peer-review dimensions (1–5): Clarity, Relevance, Informativeness, and Structure.
 
-**Release scope.** This repository contains training / inference code, paper hyperparameters, a project page (`index.html`), and a **300-figure human-rated demo** with splits and PNG crops. The full 3,857-figure corpus is on Hugging Face.
+**Release scope.** This repository contains training / inference code, paper hyperparameters, and a **300-figure human-rated demo** with splits and PNG crops. The full 3,857-figure corpus is on Hugging Face: [haihanlamu/SciFigAlign](https://huggingface.co/datasets/haihanlamu/SciFigAlign).
 
 <p align="center">
   <img src="assets/img/fig1.png" alt="SciFigAlign overview" width="92%" />
@@ -105,8 +106,7 @@ Paper defaults live in [`config/paper_config.json`](config/paper_config.json).
 │   ├── figures/
 │   ├── splits/{train,val,test}.jsonl
 │   └── demo_corpus_meta.json
-├── assets/                  # project-page figures & CSS
-└── index.html               # project page
+└── assets/                  # paper figures & CSS
 ```
 
 ---
@@ -152,7 +152,12 @@ Paths inside the JSONL files are resolved via [`src/path_config.py`](src/path_co
 
 ### Full corpus
 
-Complete 3,857-figure release: [huggingface.co/datasets/Jhao0930/capstone-figures](https://huggingface.co/datasets/Jhao0930/capstone-figures)
+Complete 3,857-figure release: [huggingface.co/datasets/haihanlamu/SciFigAlign](https://huggingface.co/datasets/haihanlamu/SciFigAlign)
+
+```bash
+git lfs install
+git clone https://huggingface.co/datasets/haihanlamu/SciFigAlign
+```
 
 Place images under `./data/figures`, `./data_source/figures`, or `../capstone-figures`, then rebuild JSONL with `prepare_dataset.py` / `split_dataset.py` as needed. Paper protocol: **paper-level** 80/10/10 split, seed **42**.
 
@@ -198,12 +203,6 @@ Within-paper pairs with gold gap ≥ 0.5 are counted (paper τ=0.5).
 
 ---
 
-## Project Page
-
-Open [`index.html`](index.html) locally, or serve the repository root with any static file server. Paper: [arXiv:2607.27066](https://arxiv.org/abs/2607.27066).
-
----
-
 ## Reproducibility Notes
 
 - Entry points take explicit paths; no machine-local usernames are required for the demo.
@@ -215,7 +214,7 @@ Open [`index.html`](index.html) locally, or serve the repository root with any s
 
 ## License
 
-Source code is released under the **MIT License**. The Hugging Face corpus retains its dataset terms.
+Source code is released under the **MIT License**. The Hugging Face corpus ([haihanlamu/SciFigAlign](https://huggingface.co/datasets/haihanlamu/SciFigAlign)) is released under **Apache-2.0**.
 
 ---
 
